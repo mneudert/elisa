@@ -1,7 +1,9 @@
-local elisa = {}
-
-elisa.hello = function()
-  ngx.say("hello world")
+--- Handles an Elisa request.
+local function handle_request()
+  ngx.print('hello world')
 end
 
-return elisa
+-- export module
+return {
+  handle = handle_request
+}

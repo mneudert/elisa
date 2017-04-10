@@ -1,5 +1,28 @@
 # Elisa
 
+## Usage
+
+To activate the module you have to extend your server configuration:
+
+```nginx
+lua_package_path './src/?.lua;;';
+
+init_by_lua_block {
+    elisa = require('elisa')
+}
+```
+
+Then you can process requests in your host configuration:
+
+```nginx
+location /searchproxy {
+    content_by_lua_block {
+        elisa.handle()
+    }
+}
+```
+
+
 ## Testing
 
 ### Prerequisites
