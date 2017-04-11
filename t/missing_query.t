@@ -22,7 +22,7 @@ run_tests();
 
 __DATA__
 
-=== TEST 1: Hello World
+=== TEST 1: Missing query returns empty object
 --- http_config eval: $::http_config
 --- config
     location /t {
@@ -33,4 +33,4 @@ __DATA__
 --- request
 GET /t
 --- response_body
-hello world
+{}
