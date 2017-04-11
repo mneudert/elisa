@@ -46,3 +46,28 @@ GET /t?query=foo
 --- response_body_like
 /__elisa__/upstream/test_data/_search
 .+"query":.+"foo".+
+
+=== TEST 2: Query gets passed properly encoded
+--- http_config eval: $::http_config
+--- config
+    location ~* ^/__elisa__/upstream(.*) {
+        internal;
+
+        content_by_lua_block {
+            ngx.req.read_body()
+
+            ngx.say(ngx.var.uri)
+            ngx.say(ngx.req.get_body_data())
+        }
+    }
+
+    location /t {
+        content_by_lua_block {
+            elisa.handle()
+        }
+    }
+--- request
+GET /t?query=%22%2F%C3%A4%C3%B6%C3%BC%7C%22
+--- response_body_like
+/__elisa__/upstream/test_data/_search
+.+"query":.+"\"\/\\u00e4\\u00f6\\u00fc|\"".+

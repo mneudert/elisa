@@ -1,3 +1,5 @@
+local cjson = require('cjson.safe')
+
 --- Handles an Elisa request.
 local function handle_request()
   local args = ngx.req.get_uri_args()
@@ -14,7 +16,7 @@ local function handle_request()
       "query": {
         "match_phrase_prefix": {
           "name": {
-            "query":          "]] .. args.query .. [[",
+            "query":          "]] .. cjson.encode(args.query) .. [[",
             "max_expansions": 10
           }
         }
