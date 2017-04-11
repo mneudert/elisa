@@ -1,4 +1,14 @@
 local cjson = require('cjson.safe')
+local stdquery = [[{
+  "query": {
+    "match_phrase_prefix": {
+      "name": {
+        "query":          "!!!query!!!",
+        "max_expansions": 10
+      }
+    }
+  }
+}]]
 
 --- Handles an Elisa request.
 local function handle_request()
@@ -11,19 +21,11 @@ local function handle_request()
     return
   end
 
-  body = [[
-    {
-      "query": {
-        "match_phrase_prefix": {
-          "name": {
-            "query":          "]] .. cjson.encode(args.query) .. [[",
-            "max_expansions": 10
-          }
-        }
-      }
-    }
-  ]]
+  -- cjson encode adds quotes around a string
+  -- prevent table placeholder to create double quotes
+  query = query:gsub('"!!!query!!!"', '!!!query!!!')
 
+  body   = stdquery:gsub('!!!query!!!', cjson.encode(args.query))
   search = ngx.location.capture(
     '/__elisa__/upstream/test_data/_search',
     { body = body }
