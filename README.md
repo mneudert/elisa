@@ -29,6 +29,37 @@ location /searchproxy {
 }
 ```
 
+### Customized Queries
+
+By default a query passed using the GET parameter `query` (i.e. when opening
+`http://my.host/searchproxy?query=foo-bar`) is converted to the following
+Elasticsearch query:
+
+```json
+{
+  "query": {
+    "match_phrase_prefix": {
+      "name": {
+        "query":          "foo-bar",
+        "max_expansions": 10
+      }
+    }
+  }
+}
+```
+
+You can however modify what is getting send to Elasticsearch:
+
+```lua
+elisa.handle({ query = '!!!query!!!' })
+elisa.handle('{"query":"!!!query!!!"}')
+```
+
+Both a table and a plain string are accepted. Despite the minimal example the
+full query has to be passed in.
+
+The value `!!!query!!!` will automatically be replaced with the actual search.
+
 
 ## Testing
 
