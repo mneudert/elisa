@@ -16,9 +16,9 @@ Then you can process requests in your host configuration:
 
 ```nginx
 # elasticsearch upstream location
-location ~* ^/__elisa__/upstream(.*) {
+location ~* ^/__elisa__/upstream/(.*) {
     internal;
-    proxy_pass http://127.0.0.1:9200$1;
+    proxy_pass http://127.0.0.1:9200/$1;
 }
 
 # public elisa endpoint
