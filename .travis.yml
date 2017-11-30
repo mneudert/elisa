@@ -1,5 +1,4 @@
 language: perl
-dist:     trusty
 sudo:     false
 
 addons:
