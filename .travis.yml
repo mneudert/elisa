@@ -33,4 +33,4 @@ script:  |-
 
   export PATH="$PATH:${TRAVIS_BUILD_DIR}/vendor/nginx-${VER_NGINX}/objs"
 
-  prove $@
+  prove
