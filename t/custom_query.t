@@ -45,7 +45,7 @@ __DATA__
 GET /t?query=foo
 --- response_body_like
 /__elisa__/upstream/test_data/_search
-{"ignore_details":"foo"}
+\{"ignore_details":"foo"}
 
 === TEST 2: Custom query passed as table
 --- http_config eval: $::http_config
@@ -70,4 +70,4 @@ GET /t?query=foo
 GET /t?query=foo
 --- response_body_like
 /__elisa__/upstream/test_data/_search
-{"ignore_details":"foo"}
+\{"ignore_details":"foo"}
