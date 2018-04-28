@@ -1,5 +1,5 @@
 language: perl
-sudo:     false
+sudo: false
 
 addons:
   apt:
@@ -9,7 +9,7 @@ addons:
       - lua-cjson
 
 install: cpanm -v --notest Test::Nginx
-script:  |-
+script: |-
   export LUAJIT_LIB=/usr/lib/x86_64-linux-gnu/
   export LUAJIT_INC=/usr/include/luajit-2.0/
   export VER_LUA_NGINX=0.10.10

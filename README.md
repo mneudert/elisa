@@ -40,7 +40,7 @@ Elasticsearch query:
   "query": {
     "match_phrase_prefix": {
       "name": {
-        "query":          "foo-bar",
+        "query": "foo-bar",
         "max_expansions": 10
       }
     }
@@ -51,7 +51,7 @@ Elasticsearch query:
 You can however modify what is getting send to Elasticsearch:
 
 ```lua
-elisa.handle({ query = '!!!query!!!' })
+elisa.handle({query = '!!!query!!!'})
 elisa.handle('{"query":"!!!query!!!"}')
 ```
 
